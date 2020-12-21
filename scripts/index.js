@@ -5,8 +5,10 @@ import { musicPlayerInit } from './musicPlayer.js';
 /* variables */
 const playerButtons = document.querySelectorAll('.player-btn');
 const playerBlocks = document.querySelectorAll('.player-block');
+const temp = document.querySelector('.temp');
 
 const deactivationPlayer = () => {
+  temp.style.display = 'none';
   playerButtons.forEach((item) => item.classList.remove('active'));
   playerBlocks.forEach((item) => item.classList.remove('active'));
 };
