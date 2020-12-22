@@ -6,4 +6,19 @@ export const videoPlayerInit = () => {
   const timePassed = document.querySelector('.video-time__passed');
   const progress = document.querySelector('.progress');
   const timeTotal = document.querySelector('.video-time__total');
+
+  const toggleIcon = () => {
+    if (videoPlayer.paused) {
+      btnPlay.classList.remove('fa-pause');
+      btnPlay.classList.add('fa-play');
+    } else {
+      btnPlay.classList.remove('fa-play');
+      btnPlay.classList.add('fa-pause');
+    }
+  };
+
+  videoPlayer.addEventListener('click', () => {
+    videoPlayer.paused ? videoPlayer.play() : videoPlayer.pause();
+    toggleIcon();
+  });
 };
