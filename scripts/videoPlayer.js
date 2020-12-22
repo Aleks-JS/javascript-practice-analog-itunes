@@ -26,6 +26,12 @@ export const videoPlayerInit = () => {
     videoPlayer.currentTime = 0;
   };
 
+  const changeCurrentPlayingTime = () => {
+    const duration = videoPlayer.duration;
+    const value = progress.value;
+    videoPlayer.currentTime = (value * duration) / 100;
+  };
+
   const addZero = (n) => (n < 10 ? `0${n}` : n);
 
   videoPlayer.addEventListener('click', togglePlay);
@@ -55,10 +61,5 @@ export const videoPlayerInit = () => {
     timeTotal.textContent = `${addZero(minuteTotal)}:${addZero(secondsTotal)}`;
   });
 
-  progress.addEventListener('change', () => {
-    const duration = videoPlayer.duration;
-    const value = progress.value;
-
-    videoPlayer.currentTime = (value * duration) / 100;
-  });
+  progress.addEventListener('input', changeCurrentPlayingTime);
 };
