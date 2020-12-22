@@ -19,9 +19,11 @@ export const videoPlayerInit = () => {
 
   const togglePlay = () => {
     videoPlayer.paused ? videoPlayer.play() : videoPlayer.pause();
-    toggleIcon();
   };
 
   videoPlayer.addEventListener('click', togglePlay);
   btnPlay.addEventListener('click', togglePlay);
+
+  videoPlayer.addEventListener('play', toggleIcon);
+  videoPlayer.addEventListener('pause', toggleIcon);
 };
