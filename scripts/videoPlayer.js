@@ -49,5 +49,7 @@ export const videoPlayerInit = () => {
     timePassed.textContent = `${addZero(minutePassed)}:${addZero(
       secondsPassed
     )}`;
+
+    timeTotal.textContent = `${addZero(minuteTotal)}:${addZero(secondsTotal)}`;
   });
 };
