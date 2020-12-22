@@ -4,7 +4,7 @@ export const videoPlayerInit = () => {
   const btnPlay = document.querySelector('.video-button__play');
   const btnStop = document.querySelector('.video-button__stop');
   const timePassed = document.querySelector('.video-time__passed');
-  const progress = document.querySelector('.progress');
+  const progress = document.querySelector('.video-progress');
   const timeTotal = document.querySelector('.video-time__total');
 
   const toggleIcon = () => {
@@ -26,7 +26,7 @@ export const videoPlayerInit = () => {
     videoPlayer.currentTime = 0;
   };
 
-  const addZero = (n) => (n < 10 ? '0' + n : n);
+  const addZero = (n) => (n < 10 ? `0${n}` : n);
 
   videoPlayer.addEventListener('click', togglePlay);
   btnPlay.addEventListener('click', togglePlay);
@@ -40,6 +40,8 @@ export const videoPlayerInit = () => {
     const currentTime = videoPlayer.currentTime;
     const duration = videoPlayer.duration;
 
+    progress.value = (currentTime / duration) * 100;
+
     let minutePassed = Math.floor(currentTime / 60);
     let secondsPassed = Math.floor(currentTime % 60);
 
@@ -51,5 +53,12 @@ export const videoPlayerInit = () => {
     )}`;
 
     timeTotal.textContent = `${addZero(minuteTotal)}:${addZero(secondsTotal)}`;
+  });
+
+  progress.addEventListener('change', () => {
+    const duration = videoPlayer.duration;
+    const value = progress.value;
+
+    videoPlayer.currentTime = (value * duration) / 100;
   });
 };
