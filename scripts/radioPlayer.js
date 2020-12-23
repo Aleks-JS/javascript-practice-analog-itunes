@@ -3,7 +3,7 @@ export const radioPlayerInit = () => {
   const radio = document.querySelector('.radio');
   const radioCoverImg = document.querySelector('.radio-cover__img');
   const radioNavigation = document.querySelector('.radio-navigation');
-  const radioHeader = document.querySelector('.radio-header');
+  const radioHeaderBig = document.querySelector('.radio-header__big');
   const radioItem = document.querySelectorAll('.radio-item');
   const radioStop = document.querySelector('.radio-stop');
 
@@ -32,7 +32,9 @@ export const radioPlayerInit = () => {
   radioNavigation.addEventListener('change', (e) => {
     const target = e.target;
     const parent = target.closest('.radio-item');
+    const title = parent.querySelector('.radio-name').textContent;
 
+    radioHeaderBig.textContent = title;
     selectItem(parent);
 
     radioStop.disabled = false;
