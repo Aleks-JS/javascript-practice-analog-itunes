@@ -33,9 +33,12 @@ export const radioPlayerInit = () => {
     const target = e.target;
     const parent = target.closest('.radio-item');
     const title = parent.querySelector('.radio-name').textContent;
+    const urlImg = parent.querySelector('.radio-img').src;
 
     radioHeaderBig.textContent = title;
     selectItem(parent);
+
+    radioCoverImg.src = urlImg;
 
     radioStop.disabled = false;
 
