@@ -14,4 +14,16 @@ export const musicPlayerInit = () => {
   const playlist = ['hello', 'flow', 'speed'];
 
   let trackIndex = 0;
+
+  audioNavigation.addEventListener('click', (e) => {
+    const target = e.target;
+
+    if (target.classList.contains('audio-button__play')) {
+      audio.classList.toggle('play');
+      audioButtonPlay.classList.toggle('fa-play');
+      audioButtonPlay.classList.toggle('fa-pause');
+
+      audioPlayer.paused ? audioPlayer.play() : audioPlayer.pause();
+    }
+  });
 };
