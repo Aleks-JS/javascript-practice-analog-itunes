@@ -9,6 +9,7 @@ export const videoPlayerInit = () => {
   const progress = document.querySelector('.video-progress');
   const timeTotal = document.querySelector('.video-time__total');
   const volume = document.querySelector('.video-volume');
+  const buttonFullscreen = document.querySelector('.fullscreen-button');
 
   videoPlayer.addEventListener('fullscreenchange', () => {
     document.fullscreen
@@ -75,4 +76,17 @@ export const videoPlayerInit = () => {
   volume.addEventListener('input', () => volumeControl());
 
   progress.addEventListener('input', changeCurrentPlayingTime);
+
+  // fullscreen mode
+  buttonFullscreen.addEventListener('click', () => {
+    if (videoPlayer.requestFullscreen) {
+      videoPlayer.requestFullscreen();
+    } else if (videoPlayer.mozRequestFullScreen) {
+      videoPlayer.mozRequestFullScreen();
+    } else if (videoPlayer.webkitRequestFullscreen) {
+      videoPlayer.webkitRequestFullscreen();
+    } else if (videoPlayer.msRequestFullscreen) {
+      videoPlayer.msRequestFullscreen();
+    }
+  });
 };

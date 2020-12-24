@@ -12,6 +12,7 @@ export const musicPlayerInit = () => {
   const audioProgress = document.querySelector('.audio-progress');
   const audioProgressTiming = document.querySelector('.audio-progress__timing');
   const audioTimeTotal = document.querySelector('.audio-time__total');
+  const audioMain = document.querySelector('.audio-container');
 
   const playlist = ['hello', 'flow', 'speed'];
 
@@ -40,15 +41,19 @@ export const musicPlayerInit = () => {
     loadTrack();
   };
 
+  const renderControlButtons = () => {
+    audio.classList.toggle('play');
+    audioButtonPlay.classList.toggle('fa-play');
+    audioButtonPlay.classList.toggle('fa-pause');
+
+    audioPlayer.paused ? audioPlayer.play() : audioPlayer.pause();
+  };
+
   audioNavigation.addEventListener('click', (e) => {
     const target = e.target;
 
     if (target.classList.contains('audio-button__play')) {
-      audio.classList.toggle('play');
-      audioButtonPlay.classList.toggle('fa-play');
-      audioButtonPlay.classList.toggle('fa-pause');
-
-      audioPlayer.paused ? audioPlayer.play() : audioPlayer.pause();
+      renderControlButtons();
     }
 
     if (target.classList.contains('audio-button__next')) {
@@ -101,5 +106,10 @@ export const musicPlayerInit = () => {
     const progress = (x / allWidth) * audioPlayer.duration;
 
     audioPlayer.currentTime = progress;
+  });
+
+  // старт/стоп воспроизведения трека по нажатию на название или ковер трека
+  audioMain.addEventListener('click', () => {
+    renderControlButtons();
   });
 };
