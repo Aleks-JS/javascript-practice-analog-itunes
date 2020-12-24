@@ -7,6 +7,12 @@ export const videoPlayerInit = () => {
   const progress = document.querySelector('.video-progress');
   const timeTotal = document.querySelector('.video-time__total');
 
+  videoPlayer.addEventListener('fullscreenchange', () => {
+    document.fullscreen
+      ? (videoPlayer.controls = true)
+      : (videoPlayer.controls = false);
+  });
+
   const toggleIcon = () => {
     if (videoPlayer.paused) {
       btnPlay.classList.remove('fa-pause');
