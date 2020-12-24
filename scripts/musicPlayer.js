@@ -79,11 +79,11 @@ export const musicPlayerInit = () => {
 
     audioProgressTiming.style.width = `${progress}%`;
 
-    const minutePassed = Math.floor(currentTime / 60);
-    const secondsPassed = Math.floor(currentTime % 60);
+    const minutePassed = Math.floor(currentTime / 60) || '0';
+    const secondsPassed = Math.floor(currentTime % 60) || '0';
 
-    const minuteTotal = Math.floor(duration / 60);
-    const secondsTotal = Math.floor(duration % 60);
+    const minuteTotal = Math.floor(duration / 60) || '0';
+    const secondsTotal = Math.floor(duration % 60) || '0';
 
     audioTimePassed.textContent = `${addZero(minutePassed)}:${addZero(
       secondsPassed
@@ -92,5 +92,14 @@ export const musicPlayerInit = () => {
     audioTimeTotal.textContent = `${addZero(minuteTotal)}:${addZero(
       secondsTotal
     )}`;
+  });
+
+  // перемотка трэка по клику на прогресс-бар
+  audioProgress.addEventListener('click', (e) => {
+    const x = e.offsetX;
+    const allWidth = audioProgress.clientWidth;
+    const progress = (x / allWidth) * audioPlayer.duration;
+
+    audioPlayer.currentTime = progress;
   });
 };
