@@ -41,6 +41,10 @@ export const videoPlayerInit = () => {
     videoPlayer.currentTime = (value * duration) / 100;
   };
 
+  const volumeControl = () => (videoPlayer.volume = volume.value / 100);
+
+  volumeControl();
+
   videoPlayer.addEventListener('click', togglePlay);
   btnPlay.addEventListener('click', togglePlay);
 
@@ -67,6 +71,8 @@ export const videoPlayerInit = () => {
 
     timeTotal.textContent = `${addZero(minuteTotal)}:${addZero(secondsTotal)}`;
   });
+
+  volume.addEventListener('input', () => volumeControl());
 
   progress.addEventListener('input', changeCurrentPlayingTime);
 };
