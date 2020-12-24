@@ -1,3 +1,5 @@
+import { addZero } from './supportScript.js';
+
 export const musicPlayerInit = () => {
   /* variables */
   const audio = document.querySelector('.audio');
@@ -57,13 +59,38 @@ export const musicPlayerInit = () => {
       prevTrack();
     }
 
+    // Обновление обложки и названия трэка при переключении
     const track = playlist[trackIndex];
     audioImg.src = `./audio/${track}.jpg`;
     audioHeader.textContent = track.toUpperCase();
   });
 
+  // переключение трэка на следующий при окончании текущего
   audioPlayer.addEventListener('ended', () => {
     nextTrack();
     audioPlayer.play();
+  });
+
+  audioPlayer.addEventListener('timeupdate', () => {
+    const currentTime = audioPlayer.currentTime;
+    const duration = audioPlayer.duration;
+
+    const progress = (currentTime / duration) * 100;
+
+    audioProgressTiming.style.width = `${progress}%`;
+
+    const minutePassed = Math.floor(currentTime / 60);
+    const secondsPassed = Math.floor(currentTime % 60);
+
+    const minuteTotal = Math.floor(duration / 60);
+    const secondsTotal = Math.floor(duration % 60);
+
+    audioTimePassed.textContent = `${addZero(minutePassed)}:${addZero(
+      secondsPassed
+    )}`;
+
+    audioTimeTotal.textContent = `${addZero(minuteTotal)}:${addZero(
+      secondsTotal
+    )}`;
   });
 };
