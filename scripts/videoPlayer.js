@@ -8,6 +8,7 @@ export const videoPlayerInit = () => {
   const timePassed = document.querySelector('.video-time__passed');
   const progress = document.querySelector('.video-progress');
   const timeTotal = document.querySelector('.video-time__total');
+  const volume = document.querySelector('.video-volume');
 
   videoPlayer.addEventListener('fullscreenchange', () => {
     document.fullscreen

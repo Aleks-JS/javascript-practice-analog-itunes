@@ -86,6 +86,7 @@
     <link rel="stylesheet" href="styles/normalize.css" />
     <link rel="stylesheet" href="styles/font-awesome.min.css" />
     <link rel="stylesheet" href="styles/style.min.css" />
+    <link rel="stylesheet" href="styles/customStyle.css" />
   </head>
 
   <body>
@@ -131,6 +132,18 @@
                 value="0"
               />
               <p class="video-time video-time__total">00:00</p>
+              <button class="video-button fa fa-volume-off"></button>
+              <input
+                type="range"
+                name="video-volume"
+                min="0"
+                max="100"
+                step="0.1"
+                value="30"
+                class="video-volume"
+              />
+              <button class="video-button fa fa-volume-up"></button>
+              <button class="video-button fa fa-expand"></button>
             </nav>
           </div>
         </div>
