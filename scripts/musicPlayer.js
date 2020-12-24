@@ -22,12 +22,24 @@ export const musicPlayerInit = () => {
     audioHeader.textContent = track.toUpperCase();
     audioPlayer.src = `./audio/${track}.mp3`;
 
+    // проверка воспроизведения музыки на момент переключения трэка
     isPlayed ? audioPlayer.pause() : audioPlayer.play();
+  };
+
+  const nextTrack = () => {
+    const lastTrack = playlist.length - 1;
+    trackIndex !== lastTrack ? trackIndex++ : (trackIndex = 0);
+    loadTrack();
+  };
+
+  const prevTrack = () => {
+    const lastTrack = playlist.length - 1;
+    trackIndex !== 0 ? trackIndex-- : (trackIndex = lastTrack);
+    loadTrack();
   };
 
   audioNavigation.addEventListener('click', (e) => {
     const target = e.target;
-    const lastTrack = playlist.length - 1;
 
     if (target.classList.contains('audio-button__play')) {
       audio.classList.toggle('play');
@@ -38,17 +50,20 @@ export const musicPlayerInit = () => {
     }
 
     if (target.classList.contains('audio-button__next')) {
-      trackIndex !== lastTrack ? trackIndex++ : (trackIndex = 0);
-      loadTrack();
+      nextTrack();
     }
 
     if (target.classList.contains('audio-button__prev')) {
-      trackIndex !== 0 ? trackIndex-- : (trackIndex = lastTrack);
-      loadTrack();
+      prevTrack();
     }
 
     const track = playlist[trackIndex];
     audioImg.src = `./audio/${track}.jpg`;
     audioHeader.textContent = track.toUpperCase();
+  });
+
+  audioPlayer.addEventListener('ended', () => {
+    nextTrack();
+    audioPlayer.play();
   });
 };
