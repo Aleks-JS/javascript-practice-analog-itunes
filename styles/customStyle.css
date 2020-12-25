@@ -1,7 +1,63 @@
 .video-navigation input[type="range"].video-volume {
-  width: 10%;
+  width: 20%;
 }
 
 .audio-container {
   cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  .video-navigation input[type="range"].video-volume {
+    width: 35%;
+  }
+}
+
+@media (max-width: 650px) {
+  .container {
+    max-width: 466px;
+  }
+
+  .video-player {
+    height: 261px;
+  }
+
+  .video-time__total {
+    display: none;
+  }
+}
+
+@media (max-width: 550px) {
+  .video-time__passed {
+    display: none;
+  }
+
+  .video-navigation {
+    bottom: -40px;
+  }
+}
+
+@media (max-width: 470px) {
+  .container {
+    max-width: 390px;
+  }
+
+  .video-player {
+    height: 218px;
+  }
+
+  .video-button {
+    margin: 5px;
+  }
+
+}
+
+@media (max-width: 400px) {
+  .container {
+    max-width: 315px;
+  }
+
+  .video-player {
+    height: 176px;
+  }
+
 }
