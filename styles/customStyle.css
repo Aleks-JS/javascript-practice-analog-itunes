@@ -1,0 +1,7 @@
+.video-navigation input[type="range"].video-volume {
+  width: 10%;
+}
+
+.audio-container {
+  cursor: pointer;
+}

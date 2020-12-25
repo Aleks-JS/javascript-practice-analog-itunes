@@ -25,7 +25,7 @@ export const musicPlayerInit = () => {
     audioHeader.textContent = track.toUpperCase();
     audioPlayer.src = `./audio/${track}.mp3`;
 
-    // проверка воспроизведения музыки на момент переключения трэка
+    // проверка воспроизведения музыки на момент переключения трека
     isPlayed ? audioPlayer.pause() : audioPlayer.play();
   };
 
@@ -49,6 +49,29 @@ export const musicPlayerInit = () => {
     audioPlayer.paused ? audioPlayer.play() : audioPlayer.pause();
   };
 
+  const timeUpdate = () => {
+    const currentTime = audioPlayer.currentTime;
+    const duration = audioPlayer.duration;
+    const progress = (currentTime / duration) * 100;
+
+    // для firefox ставим проверку для того, чтоб обнулялся прогресс-бар при переключение трека на паузе
+    audioProgressTiming.style.width = (currentTime && `${progress}%`) || '0';
+
+    const minutePassed = Math.floor(currentTime / 60) || '0';
+    const secondsPassed = Math.floor(currentTime % 60) || '0';
+
+    const minuteTotal = Math.floor(duration / 60) || '0';
+    const secondsTotal = Math.floor(duration % 60) || '0';
+
+    audioTimePassed.textContent = `${addZero(minutePassed)}:${addZero(
+      secondsPassed
+    )}`;
+
+    audioTimeTotal.textContent = `${addZero(minuteTotal)}:${addZero(
+      secondsTotal
+    )}`;
+  };
+
   audioNavigation.addEventListener('click', (e) => {
     const target = e.target;
 
@@ -64,42 +87,21 @@ export const musicPlayerInit = () => {
       prevTrack();
     }
 
-    // Обновление обложки и названия трэка при переключении
+    // Обновление обложки и названия трека при переключении
     const track = playlist[trackIndex];
     audioImg.src = `./audio/${track}.jpg`;
     audioHeader.textContent = track.toUpperCase();
   });
 
-  // переключение трэка на следующий при окончании текущего
+  // переключение трека на следующий при окончании текущего
   audioPlayer.addEventListener('ended', () => {
     nextTrack();
     audioPlayer.play();
   });
 
-  audioPlayer.addEventListener('timeupdate', () => {
-    const currentTime = audioPlayer.currentTime;
-    const duration = audioPlayer.duration;
+  audioPlayer.addEventListener('timeupdate', timeUpdate);
 
-    const progress = (currentTime / duration) * 100;
-
-    audioProgressTiming.style.width = `${progress}%`;
-
-    const minutePassed = Math.floor(currentTime / 60) || '0';
-    const secondsPassed = Math.floor(currentTime % 60) || '0';
-
-    const minuteTotal = Math.floor(duration / 60) || '0';
-    const secondsTotal = Math.floor(duration % 60) || '0';
-
-    audioTimePassed.textContent = `${addZero(minutePassed)}:${addZero(
-      secondsPassed
-    )}`;
-
-    audioTimeTotal.textContent = `${addZero(minuteTotal)}:${addZero(
-      secondsTotal
-    )}`;
-  });
-
-  // перемотка трэка по клику на прогресс-бар
+  // перемотка трека по клику на прогресс-бар
   audioProgress.addEventListener('click', (e) => {
     const x = e.offsetX;
     const allWidth = audioProgress.clientWidth;
