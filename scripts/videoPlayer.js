@@ -10,6 +10,8 @@ export const videoPlayerInit = () => {
   const timeTotal = document.querySelector('.video-time__total');
   const volume = document.querySelector('.video-volume');
   const buttonFullscreen = document.querySelector('.fullscreen-button');
+  const btnVolumeOff = document.querySelector('.volume-off');
+  const btnVolumeUp = document.querySelector('.volume-up');
 
   videoPlayer.addEventListener('fullscreenchange', () => {
     document.fullscreen
@@ -53,6 +55,15 @@ export const videoPlayerInit = () => {
   videoPlayer.addEventListener('pause', toggleIcon);
 
   btnStop.addEventListener('click', stopPlay);
+
+  btnVolumeOff.addEventListener('click', () => {
+    volume.value = videoPlayer.volume = 0;
+  });
+
+  btnVolumeUp.addEventListener('click', () => {
+    videoPlayer.volume = 1;
+    volume.value = 100;
+  });
 
   videoPlayer.addEventListener('timeupdate', () => {
     const currentTime = videoPlayer.currentTime;
