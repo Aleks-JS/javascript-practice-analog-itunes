@@ -45,9 +45,9 @@ export const videoPlayerInit = () => {
     videoPlayer.currentTime = (value * duration) / 100;
   };
 
-  const volumeControl = () => (videoPlayer.volume = volume.value / 100);
+  // const volumeControl = () => (videoPlayer.volume = volume.value / 100);
 
-  volumeControl();
+  mediaSetting.volumeControl(videoPlayer, volume);
 
   videoPlayer.addEventListener('click', togglePlay);
   btnPlay.addEventListener('click', togglePlay);
@@ -87,7 +87,9 @@ export const videoPlayerInit = () => {
     )}:${mediaSetting.addZero(secondsTotal)}`;
   });
 
-  volume.addEventListener('input', () => volumeControl());
+  volume.addEventListener('input', () =>
+    mediaSetting.volumeControl(videoPlayer, volume)
+  );
 
   progress.addEventListener('input', changeCurrentPlayingTime);
 

@@ -6,6 +6,54 @@
   cursor: pointer;
 }
 
+/* volume slider to music player */
+input[type=range].audio-volume {
+  width: 100px;
+  height: 4px;
+  border-radius: 3px;
+  background-color: #ffffff;
+  margin: 12px 0;
+  cursor: pointer;
+  -webkit-appearance: none;
+  overflow: hidden;
+}
+
+input[type=range].audio-volume::-webkit-slider-runnable-track {
+  height: 5px;
+  border-radius: 3px;
+  -webkit-appearance: none;
+  background-color: #ffffff;
+}
+
+input[type=range].audio-volume::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background-color: #3845ff;
+  box-shadow: -100px 0 0 100px #F51E38;
+}
+
+input[type=range].audio-volume::-moz-range-track {
+  height: 4px;
+  border-radius: 3px;
+  background-color: #fff;
+}
+
+input[type=range].audio-volume::-moz-range-thumb {
+  height: 15px;
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
+}
+
+input[type="range"].audio-volume::-moz-range-progress {
+  background-color: #F51E38;
+}
+
+input[type="range"].audio-volume::-ms-fill-lower {
+  background-color: #F51E38;
+}
+
 @media (max-width: 1024px) {
   .video-navigation input[type="range"].video-volume {
     width: 35%;

@@ -13,7 +13,11 @@ export const musicPlayerInit = () => {
   const audioProgressTiming = document.querySelector('.audio-progress__timing');
   const audioTimeTotal = document.querySelector('.audio-time__total');
   const audioMain = document.querySelector('.audio-container');
+  const audioVolume = document.querySelector('.audio-volume');
+  const audioVolumeValue = document.querySelector('.audio-volume__value');
   const mediaSetting = new MediaSetting();
+
+  console.log(audioProgress);
 
   const playlist = ['hello', 'flow', 'speed'];
 
@@ -114,5 +118,14 @@ export const musicPlayerInit = () => {
   // старт/стоп воспроизведения трека по нажатию на название или ковер трека
   audioMain.addEventListener('click', () => {
     renderControlButtons();
+  });
+
+  // контроль громкости
+  audioVolume.addEventListener('click', (e) => {
+    const x = e.offsetX;
+    const allWidth = audioVolume.clientWidth;
+    const volume = (x / allWidth) * 100;
+
+    audioPlayer.volume = volume;
   });
 };
