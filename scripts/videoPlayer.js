@@ -1,4 +1,4 @@
-import { addZero } from './supportScript.js';
+import { MediaSetting } from './supportScript.js';
 
 export const videoPlayerInit = () => {
   /* variables */
@@ -12,6 +12,7 @@ export const videoPlayerInit = () => {
   const buttonFullscreen = document.querySelector('.fullscreen-button');
   const btnVolumeOff = document.querySelector('.volume-off');
   const btnVolumeUp = document.querySelector('.volume-up');
+  const mediaSetting = new MediaSetting();
 
   videoPlayer.addEventListener('fullscreenchange', () => {
     document.fullscreen
@@ -77,11 +78,13 @@ export const videoPlayerInit = () => {
     let minuteTotal = Math.floor(duration / 60);
     let secondsTotal = Math.floor(duration % 60);
 
-    timePassed.textContent = `${addZero(minutePassed)}:${addZero(
-      secondsPassed
-    )}`;
+    timePassed.textContent = `${mediaSetting.addZero(
+      minutePassed
+    )}:${mediaSetting.addZero(secondsPassed)}`;
 
-    timeTotal.textContent = `${addZero(minuteTotal)}:${addZero(secondsTotal)}`;
+    timeTotal.textContent = `${mediaSetting.addZero(
+      minuteTotal
+    )}:${mediaSetting.addZero(secondsTotal)}`;
   });
 
   volume.addEventListener('input', () => volumeControl());

@@ -1,4 +1,4 @@
-import { addZero } from './supportScript.js';
+import { MediaSetting } from './supportScript.js';
 
 export const musicPlayerInit = () => {
   /* variables */
@@ -13,6 +13,7 @@ export const musicPlayerInit = () => {
   const audioProgressTiming = document.querySelector('.audio-progress__timing');
   const audioTimeTotal = document.querySelector('.audio-time__total');
   const audioMain = document.querySelector('.audio-container');
+  const mediaSetting = new MediaSetting();
 
   const playlist = ['hello', 'flow', 'speed'];
 
@@ -63,13 +64,13 @@ export const musicPlayerInit = () => {
     const minuteTotal = Math.floor(duration / 60) || '0';
     const secondsTotal = Math.floor(duration % 60) || '0';
 
-    audioTimePassed.textContent = `${addZero(minutePassed)}:${addZero(
-      secondsPassed
-    )}`;
+    audioTimePassed.textContent = `${mediaSetting.addZero(
+      minutePassed
+    )}:${mediaSetting.addZero(secondsPassed)}`;
 
-    audioTimeTotal.textContent = `${addZero(minuteTotal)}:${addZero(
-      secondsTotal
-    )}`;
+    audioTimeTotal.textContent = `${mediaSetting.addZero(
+      minuteTotal
+    )}:${mediaSetting.addZero(secondsTotal)}`;
   };
 
   audioNavigation.addEventListener('click', (e) => {

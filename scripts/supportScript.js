@@ -1,1 +1,8 @@
-export const addZero = (n) => (n < 10 ? `0${n}` : n);
+export class MediaSetting {
+  addZero = function (n) {
+    if (n < 10) {
+      return `0${n}`;
+    }
+    return n;
+  };
+}
