@@ -2,6 +2,7 @@ import { MediaSetting } from './supportScript.js';
 
 export const musicPlayerInit = () => {
   /* variables */
+  const playerButtons = document.querySelectorAll('.player-btn');
   const audio = document.querySelector('.audio');
   const audioImg = document.querySelector('.audio-img');
   const audioHeader = document.querySelector('.audio-header');
@@ -14,6 +15,7 @@ export const musicPlayerInit = () => {
   const audioTimeTotal = document.querySelector('.audio-time__total');
   const audioMain = document.querySelector('.audio-container');
   const audioVolume = document.querySelector('.audio-volume');
+  const CURRENT_TAB = 'audio-video';
   const mediaSetting = new MediaSetting();
 
   const playlist = ['hello', 'flow', 'speed'];
@@ -21,6 +23,17 @@ export const musicPlayerInit = () => {
   let trackIndex = 0;
 
   mediaSetting.volumeControl(audioPlayer, audioVolume);
+
+  playerButtons.forEach((btn) =>
+    btn.addEventListener('click', (e) => {
+      if (audio.classList.contains('play')) {
+        e.target.className !== CURRENT_TAB && audioPlayer.pause();
+        audio.classList.toggle('play');
+        audioButtonPlay.classList.toggle('fa-play');
+        audioButtonPlay.classList.toggle('fa-pause');
+      }
+    })
+  );
 
   const loadTrack = () => {
     const isPlayed = audioPlayer.paused;

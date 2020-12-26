@@ -2,6 +2,7 @@ import { MediaSetting } from './supportScript.js';
 
 export const videoPlayerInit = () => {
   /* variables */
+  const playerButtons = document.querySelectorAll('.player-btn');
   const videoPlayer = document.querySelector('.video-player');
   const btnPlay = document.querySelector('.video-button__play');
   const btnStop = document.querySelector('.video-button__stop');
@@ -12,7 +13,15 @@ export const videoPlayerInit = () => {
   const buttonFullscreen = document.querySelector('.fullscreen-button');
   const btnVolumeOff = document.querySelector('.volume-off');
   const btnVolumeUp = document.querySelector('.volume-up');
+  const CURRENT_TAB = 'player-video';
   const mediaSetting = new MediaSetting();
+
+  playerButtons.forEach((btn) =>
+    btn.addEventListener(
+      'click',
+      (e) => e.target.className !== CURRENT_TAB && videoPlayer.pause()
+    )
+  );
 
   videoPlayer.addEventListener('fullscreenchange', () => {
     document.fullscreen

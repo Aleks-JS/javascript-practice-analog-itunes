@@ -1,14 +1,23 @@
 export const radioPlayerInit = () => {
   /* variables */
+  const playerButtons = document.querySelectorAll('.player-btn');
   const radio = document.querySelector('.radio');
   const radioCoverImg = document.querySelector('.radio-cover__img');
   const radioNavigation = document.querySelector('.radio-navigation');
   const radioHeaderBig = document.querySelector('.radio-header__big');
   const radioItem = document.querySelectorAll('.radio-item');
   const radioStop = document.querySelector('.radio-stop');
+  const CURRENT_TAB = 'player-radio';
 
   const audio = new Audio();
   audio.type = 'audio/aac';
+
+  playerButtons.forEach((btn) =>
+    btn.addEventListener('click', (e) => {
+      e.target.className !== CURRENT_TAB && audio.pause();
+      changeIconPlay();
+    })
+  );
 
   radioStop.disabled = true;
 
