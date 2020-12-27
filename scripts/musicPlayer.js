@@ -20,6 +20,20 @@ export const musicPlayerInit = () => {
 
   const playlist = ['hello', 'flow', 'speed'];
 
+  /************************************************************************** */
+  /* canvas */
+  const canvas = document.querySelector('.visualization canvas');
+  // set size canvas
+  canvas.setAttribute('width', '1200px');
+  canvas.setAttribute('height', '250px');
+
+  const ctx = canvas.getContext('2d');
+  const audioContext = new audioCtx();
+  const canvasWidth = canvas.width;
+  const canvasHeight = canvas.height;
+
+  requestAnimationFrame(visualize);
+  /************************************************************************** */
   let trackIndex = 0;
 
   mediaSetting.volumeControl(audioPlayer, audioVolume);
