@@ -28,11 +28,32 @@ export const musicPlayerInit = () => {
   canvas.setAttribute('height', '250px');
 
   const ctx = canvas.getContext('2d');
+  const audioCtx = window.AudioContext || window.webkitAudioContext;
   const audioContext = new audioCtx();
   const canvasWidth = canvas.width;
   const canvasHeight = canvas.height;
 
+  const buildAudioGraph = () => {
+    audioPlayer.onplay = (e) => audioContext.resume();
+  };
+
+  // исправлено для политики автозапуска
+  audioPlayer.addEventListener('play', () => audioContext.resume());
+
+  const sourceNode = audioContext.createMediaElementSource(audioPlayer);
+
+  // Создать узел анализатора
+  const analyser = audioContext.createAnalyser();
+  analyser.fftSize = 512;
+  const bufferLength = analyser.frequencyBinCount;
+  const dataArray = new Uint8Array(bufferLength);
+  sourceNode.connect(analyser);
+  // после этой строки звук снова появляется
+  analyser.connect(audioContext.destination);
+  console.log(bufferLength, dataArray);
+
   requestAnimationFrame(visualize);
+  buildAudioGraph();
   /************************************************************************** */
   let trackIndex = 0;
 
