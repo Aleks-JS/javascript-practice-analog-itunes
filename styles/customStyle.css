@@ -148,3 +148,26 @@ input[type="range"].audio-volume::-ms-fill-lower {
   }
 
 }
+
+@media screen and (max-height: 800px) and (orientation: portrait) {
+  .header {
+    padding-top: 10px;
+    margin-bottom: 5px;
+  }
+
+  .player {
+    margin-bottom: 10px;
+  }
+
+  .audio {
+    margin-top: 10px;
+  }
+
+  .container {
+    max-height: 300px;
+  }
+
+  .audio-container {
+    height: 100%;
+  }
+}

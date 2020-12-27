@@ -35,7 +35,6 @@ export const musicPlayerInit = () => {
   const draw = () => {
     ctx.canvas.width = visualization.clientWidth;
     ctx.canvas.height = visualization.clientHeight;
-    console.log('draw', visualization.offsetWidth, visualization.offsetHeight);
   };
 
   window.addEventListener('resize', draw);
@@ -169,7 +168,6 @@ export const musicPlayerInit = () => {
 
   audioNavigation.addEventListener('click', (e) => {
     const target = e.target;
-    console.log('click');
     draw();
 
     if (target.classList.contains('audio-button__play')) {
