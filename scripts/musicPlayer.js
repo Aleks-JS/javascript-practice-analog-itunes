@@ -15,6 +15,7 @@ export const musicPlayerInit = () => {
   const audioTimeTotal = document.querySelector('.audio-time__total');
   const audioMain = document.querySelector('.audio-container');
   const audioVolume = document.querySelector('.audio-volume');
+  const visualization = document.querySelector('.visualization');
   const CURRENT_TAB = 'audio-video';
   const mediaSetting = new MediaSetting();
 
@@ -24,14 +25,20 @@ export const musicPlayerInit = () => {
   /* canvas */
   const canvas = document.querySelector('.visualization canvas');
   // set size canvas
-  canvas.setAttribute('width', '1200px');
-  canvas.setAttribute('height', '250px');
+  // canvas.setAttribute('width', visualization.offsetWidth);
+  // canvas.setAttribute('height', visualization.offsetHeight);
 
   const ctx = canvas.getContext('2d');
   const audioCtx = window.AudioContext || window.webkitAudioContext;
   const audioContext = new audioCtx();
-  const canvasWidth = canvas.width;
-  const canvasHeight = canvas.height;
+
+  const draw = () => {
+    ctx.canvas.width = visualization.clientWidth;
+    ctx.canvas.height = visualization.clientHeight;
+    console.log('draw', visualization.offsetWidth, visualization.offsetHeight);
+  };
+
+  window.addEventListener('resize', draw);
 
   const buildAudioGraph = () => {
     audioPlayer.onplay = (e) => audioContext.resume();
@@ -52,6 +59,8 @@ export const musicPlayerInit = () => {
   analyser.connect(audioContext.destination);
 
   const visualize = () => {
+    const canvasWidth = canvas.width;
+    const canvasHeight = canvas.height;
     // очистить canvas
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
@@ -160,6 +169,8 @@ export const musicPlayerInit = () => {
 
   audioNavigation.addEventListener('click', (e) => {
     const target = e.target;
+    console.log('click');
+    draw();
 
     if (target.classList.contains('audio-button__play')) {
       renderControlButtons();
@@ -198,6 +209,7 @@ export const musicPlayerInit = () => {
 
   // старт/стоп воспроизведения трека по нажатию на название или ковер трека
   audioMain.addEventListener('click', () => {
+    draw();
     renderControlButtons();
   });
 };

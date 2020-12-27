@@ -24,9 +24,12 @@
 }
 
 .visualization {
-  max-width: 1200px;
+  width: 100%;
   height: 250px;
+  margin: 0 auto;
 }
+
+.canvas {}
 
 /* volume slider to music player */
 input[type=range].audio-volume {
@@ -87,6 +90,12 @@ input[type="range"].audio-volume::-ms-fill-lower {
 
   .video-button {
     margin: 0;
+  }
+}
+
+@media (min-width: 1250px) {
+  .container {
+    max-width: 1200px;
   }
 }
 
