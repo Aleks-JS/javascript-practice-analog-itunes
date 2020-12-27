@@ -50,8 +50,38 @@ export const musicPlayerInit = () => {
   sourceNode.connect(analyser);
   // после этой строки звук снова появляется
   analyser.connect(audioContext.destination);
-  console.log(bufferLength, dataArray);
 
+  const visualize = () => {
+    // очистить canvas
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+    // Или используйте заливку RGBA, чтобы получить небольшой эффект размытия
+    // ctx.fillStyle = 'rgba (0, 0, 0, 0.5)';
+    // ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+
+    // Получить данные анализатора
+    analyser.getByteFrequencyData(dataArray);
+
+    const barWidth = canvasWidth / bufferLength;
+    let x = 0;
+
+    // значения изменяются от 0 до 256, а высота холста равна 100. Давайте изменим масштаб
+    // перед отрисовкой. Это масштабный коэффициент
+    const heightScale = canvasHeight / 128;
+
+    for (var i = 0; i < bufferLength; i++) {
+      let barHeight = dataArray[i];
+
+      ctx.fillStyle = 'rgb(' + (barHeight + 0) + ',4,160)';
+      barHeight *= heightScale;
+      ctx.fillRect(x, canvasHeight - barHeight / 2, barWidth, barHeight / 2);
+
+      // 2 - количество пикселей между столбцами
+      x += barWidth + 2;
+    }
+    // вызовите снова функцию визуализации со скоростью 60 кадров / с
+    requestAnimationFrame(visualize);
+  };
   requestAnimationFrame(visualize);
   buildAudioGraph();
   /************************************************************************** */
