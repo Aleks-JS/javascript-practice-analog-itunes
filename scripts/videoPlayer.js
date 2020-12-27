@@ -68,6 +68,7 @@ export const videoPlayerInit = () => {
 
   btnVolumeOff.addEventListener('click', () => {
     volume.value = videoPlayer.volume = 0;
+    btnVolumeOff.classList.add('enlarge-transform');
   });
 
   btnVolumeUp.addEventListener('click', () => {
@@ -96,9 +97,12 @@ export const videoPlayerInit = () => {
     )}:${mediaSetting.addZero(secondsTotal)}`;
   });
 
-  volume.addEventListener('input', () =>
-    mediaSetting.volumeControl(videoPlayer, volume)
-  );
+  volume.addEventListener('input', () => {
+    mediaSetting.volumeControl(videoPlayer, volume);
+    videoPlayer.volume === 0
+      ? btnVolumeOff.classList.add('enlarge-transform')
+      : btnVolumeOff.classList.remove('enlarge-transform');
+  });
 
   progress.addEventListener('input', changeCurrentPlayingTime);
 

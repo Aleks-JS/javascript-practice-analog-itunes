@@ -2,8 +2,30 @@
   max-width: 10%;
 }
 
+.video-button {
+  transition: .2s;
+  -webkit-transition: .2s;
+  -moz-transition: .2s;
+  -ms-transition: .2s;
+  -o-transition: .2s;
+}
+
 .audio-container {
   cursor: pointer;
+}
+
+.enlarge-transform {
+  color: rgb(255, 219, 171);
+  transform: scale(1.5);
+  -webkit-transform: scale(1.5);
+  -moz-transform: scale(1.5);
+  -ms-transform: scale(1.5);
+  -o-transform: scale(1.5);
+}
+
+.visualization {
+  max-width: 1200px;
+  height: 250px;
 }
 
 /* volume slider to music player */
